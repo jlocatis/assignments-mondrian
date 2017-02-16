@@ -63,7 +63,8 @@ function loadPainting() {
 		response = JSON.parse(xhr.responseText);
 		var counter = 0;
 		var text = "";
-		for (x = 0; x < 5; x++) {
+		var save_count = response.length / 3;
+		for (x = 0; x < save_count; x++) {
 			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter] + "</a>"
 			document.getElementsByClassName("modal_body")[0].innerHTML = text;
 			counter += 3;
@@ -113,4 +114,5 @@ function resetCanvas() {
 		}
 		row += 2;
 	}
+	save = {};
 }

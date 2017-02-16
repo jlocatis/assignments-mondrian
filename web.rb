@@ -11,7 +11,6 @@ end
 
 # Gets save painting information and stores it to a file. Mulitple saves are stored in one file.
 get('/savepainting') do
-	binding.pry
 	savePainting(params)
 end
 
