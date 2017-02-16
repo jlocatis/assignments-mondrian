@@ -7,7 +7,7 @@ def savePainting(params)
 	CSV.open("./public/saves.csv", "a+") {|csv| params.to_a.each {|elem| csv << elem}}
 end
 
-# Loads the saves (not finished). At the moment it just produces a list of save times.
+# Loads the saves file and returns it.
 def loadSaves()
 	saves_array = CSV.read("./public/saves.csv")
 	saves_array = saves_array.to_json

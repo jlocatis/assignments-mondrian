@@ -14,8 +14,7 @@ get('/savepainting') do
 	savePainting(params)
 end
 
-# Loads the saves file. Does not completely work, at the moment it just displays a list of times
-# when save data were stored.
+# Loads the saves file and returns it.
 get('/loadsaves') do
 	save = loadSaves()
 	return save

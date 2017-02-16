@@ -10,8 +10,10 @@ window.addEventListener("load", function() {
 // Sets the variables color equal to white and creates the empty save object.
 // The color variable will be changes based on what color the user selects from the color palette.
 // The save object will store a box's location and it's new color everytime something is changed.
+// The response object will hold the save information for loading if requested by the user.
 var color = "white";
 var save = {};
+var response = [];
 
 // Changes the color variable to whichever color the user selects.
 function setColor() {
@@ -52,9 +54,8 @@ function savePainting() {
 	xhr.send();
 }
 
-var response = [];
-// (Not finished) Loads the save file from the server. Right now the server just returns a list of timestamps
-// for every save.
+// Loads the save file from the server and builds links to each save found for the user to click.
+// Opens a modal window for load selection.
 function loadPainting() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/loadsaves');
@@ -79,6 +80,7 @@ function loadPainting() {
 }
 
 
+// Creates event listeners for each link built in the loadPainting function.
 function createLoadEventListeners(response) {
 	var links = document.getElementsByClassName("load_links")
 	for (x = 0; x < links.length; x++) {
@@ -86,6 +88,7 @@ function createLoadEventListeners(response) {
 	}
 }
 
+// Loads the save the user selects.
 function loadSave() {
 	resetCanvas();
 	save = this.getAttribute("data-save");
@@ -99,11 +102,15 @@ function loadSave() {
 	}
 }
 
+// Closes the load selection modal window if the user does not select a save to load.
 function hideModal() {
 	document.getElementsByClassName("modal")[0].style.display = "none";
 	document.getElementsByClassName("modal_content")[0].style.display = "none";
 }
 
+// Resets the Mondrian canvas back to it's original state. This is used before a save is loaded
+// (in case the user had already changed something) and there is a reset option provided to the user
+// on the page.
 function resetCanvas() {
 	var row = 1;
 	for (x = 0; x < 4; x++) {
