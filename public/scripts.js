@@ -66,7 +66,7 @@ function loadPainting() {
 		var text = "";
 		var save_count = response.length / 3;
 		for (x = 0; x < save_count; x++) {
-			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter] + "</a>"
+			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter][1] + "</a>"
 			document.getElementsByClassName("modal_body")[0].innerHTML = text;
 			counter += 3;
 		}

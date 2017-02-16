@@ -4,6 +4,14 @@ body {
   background-color: #aaa;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 1px 1px red;
+}
+
 #container {
   min-height: 100%;
   position: relative;
@@ -243,6 +251,7 @@ footer a:visited {
 }
 
 .modal_content {
+  font-family: Helvetica;
   display: none;
   width: 600px;
   height: 400px;
@@ -255,6 +264,8 @@ footer a:visited {
   background: #fff;
   border: 1px solid #ccc;
   padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 26px -4px red;
 }
 
 .modal_close{
@@ -263,4 +274,8 @@ footer a:visited {
   font-weight: bold;
   border: 1px solid #000;
   padding: 1px 3px;
+}
+
+.modal_body {
+  overflow-y: scroll;
 }
