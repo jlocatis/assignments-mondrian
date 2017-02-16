@@ -230,3 +230,37 @@ footer a:visited {
 #save_button {
   border-left: 13px solid #ff9933; 
 }
+
+.modal {
+  display: none;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  z-index: 9998;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.modal_content {
+  display: none;
+  width: 600px;
+  height: 400px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  margin-left: -300px;
+  margin-top: -200px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 30px;
+}
+
+.modal_close{
+  float: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid #000;
+  padding: 1px 3px;
+}

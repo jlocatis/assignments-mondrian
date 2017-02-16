@@ -58,8 +58,43 @@ function loadPainting() {
 	xhr.open('GET', '/loadsaves');
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.onload = function() {
-		response = xhr.responseText;
-		document.getElementById("show_load_files").textContent = response;
+		var response = JSON.parse(xhr.responseText);
+		var counter = 0;
+		var text = "";
+		var link_id = [];
+		for (x = 0; x < 4; x++) {
+			text = text + "<br>" + "<a href=\"javascript:;\" id=\"" + counter + "\">" + response[counter] + "</a>"
+			document.getElementsByClassName("modal_body")[0].innerHTML = text;
+			link_id.push(counter);
+			counter += 3;
+		}
+		createLoadEventListeners(link_id, response);
+		document.getElementsByClassName("modal")[0].style.display = "block";
+		document.getElementsByClassName("modal_content")[0].style.display = "block";
+		document.getElementById("x_button").addEventListener("click", hideModal);
+		document.getElementsByClassName("modal")[0].addEventListener("click", hideModal);
 	}
 	xhr.send();
+}
+
+function createLoadEventListeners(link_id, response) {
+	for (x = 0; x < link_id.length; x++) {
+		id_link = link_id[x];
+		document.getElementById(id_link).addEventListener("click", function() { loadSave(response, id_link); });
+	}
+}
+
+function loadSave(response, save) {
+	document.getElementsByClassName("modal")[0].style.display = "none";
+	document.getElementsByClassName("modal_content")[0].style.display = "none";
+	divs_to_change = response[save + 1][1].split(",");
+	colors_to_change = response[save + 2][1].split(",");
+	for (x = 0; x < divs_to_change.length; x++) {
+		document.getElementById(divs_to_change[x]).style.backgroundColor = colors_to_change[x];
+	}
+}
+
+function hideModal() {
+	document.getElementsByClassName("modal")[0].style.display = "none";
+	document.getElementsByClassName("modal_content")[0].style.display = "none";
 }

@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'pry'
 require 'csv'
+require 'json'
 require './functions.rb'
 
 # Gets index page, sets it as home.
@@ -16,7 +17,6 @@ end
 # Loads the saves file. Does not completely work, at the moment it just displays a list of times
 # when save data were stored.
 get('/loadsaves') do
-	files_to_load = loadSaves()
-	@files_to_load = files_to_load.to_s
-	return @files_to_load
+	save = loadSaves()
+	return save
 end
