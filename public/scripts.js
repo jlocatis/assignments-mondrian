@@ -4,6 +4,7 @@ window.addEventListener("load", function() {
 	document.getElementById("painting").addEventListener("click", changeColor);
 	document.getElementById("save_button").addEventListener("click", savePainting);
 	document.getElementById("load_button").addEventListener("click", loadPainting);
+	document.getElementById("reset_button").addEventListener("click", resetCanvas);
 });
 
 // Sets the variables color equal to white and creates the empty save object.
@@ -62,7 +63,7 @@ function loadPainting() {
 		response = JSON.parse(xhr.responseText);
 		var counter = 0;
 		var text = "";
-		for (x = 0; x < 4; x++) {
+		for (x = 0; x < 5; x++) {
 			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter] + "</a>"
 			document.getElementsByClassName("modal_body")[0].innerHTML = text;
 			counter += 3;
@@ -85,6 +86,7 @@ function createLoadEventListeners(response) {
 }
 
 function loadSave() {
+	resetCanvas();
 	save = this.getAttribute("data-save");
 	save = parseInt(save);
 	document.getElementsByClassName("modal")[0].style.display = "none";
@@ -99,4 +101,16 @@ function loadSave() {
 function hideModal() {
 	document.getElementsByClassName("modal")[0].style.display = "none";
 	document.getElementsByClassName("modal_content")[0].style.display = "none";
+}
+
+function resetCanvas() {
+	var row = 1;
+	for (x = 0; x < 4; x++) {
+		var box = 1;
+		for (i = 0; i < 4; i++) {
+			document.getElementById("painting").childNodes[row].childNodes[box].style.backgroundColor = "white";
+			box += 2;
+		}
+		row += 2;
+	}
 }
