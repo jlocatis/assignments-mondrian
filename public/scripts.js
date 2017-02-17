@@ -66,7 +66,7 @@ function loadPainting() {
 		var text = "";
 		var save_count = response.length / 3;
 		for (x = 0; x < save_count; x++) {
-			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter][1] + "</a>"
+			text = text + "<br>" + "<a href=\"javascript:;\" class=\"load_links\" data-save=\"" + counter + "\">" + response[counter][1] + "</a><br>"
 			document.getElementsByClassName("modal_body")[0].innerHTML = text;
 			counter += 3;
 		}
@@ -82,13 +82,18 @@ function loadPainting() {
 
 // Creates event listeners for each link built in the loadPainting function.
 function createLoadEventListeners(response) {
-	var links = document.getElementsByClassName("load_links")
+	var links = document.getElementsByClassName("load_links");
 	for (x = 0; x < links.length; x++) {
 		document.getElementsByClassName("load_links")[x].addEventListener("click", loadSave);
 	}
+
+	var remove_links = document.getElementsByClassName("remove_links");
+	for (x = 0; x < remove_links.length; x++) {
+		document.getElementsByClassName("remove_links")[x].addEventListener("click", removeSave);
+	}
 }
 
-// Loads the save the user selects.
+// Loads the save the user selects. Paints it a block at a time for nice effect.
 function loadSave() {
 	resetCanvas();
 	save = this.getAttribute("data-save");
@@ -97,8 +102,10 @@ function loadSave() {
 	document.getElementsByClassName("modal_content")[0].style.display = "none";
 	divs_to_change = response[save + 1][1].split(",");
 	colors_to_change = response[save + 2][1].split(",");
-	for (x = 0; x < divs_to_change.length; x++) {
-		document.getElementById(divs_to_change[x]).style.backgroundColor = colors_to_change[x];
+	for (var x = 0; x < divs_to_change.length; x++) {
+  		setTimeout( function(i) {    
+    		document.getElementById(divs_to_change[i]).style.backgroundColor = colors_to_change[i];
+  		}, x * 500, x);
 	}
 }
 
